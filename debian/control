@@ -1,0 +1,18 @@
+Package: source
+Section: graphics
+Priority: optional
+Maintainer: popout3d <popout3d.software@gmail.com>
+Homepage: https://launchpad.net/popout3d
+Build-Depends: debhelper (>=10)
+Standards-Version: 4.0.0
+Architecture: all
+Depends: hugin, python3
+VCS-Browser: https://github.com/popout3d/popout3d.git
+VCS-Git: https://github.com/popout3d/popout3d.git
+Description: Creates 3D images from photographs taken with an ordinary camera.
+ Take a set of photos of a subject and the software will create a 3D image
+ from each pair of photos in the set, so that you can choose the best.
+ Vertical and rotational alignment of the left and right images is essential for a convincing 3D effect, but difficult to achieve with an ordinary camera. The software corrects any misalignment.
+ Formats available are anaglyph (red/cyan), side-by-side and crossover.
+ Several sets of photos can be processed at once, they can be previewed and poor ones can be deleted.
+
