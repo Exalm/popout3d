@@ -1,7 +1,17 @@
-#! /usr/bin/python3
+#!/usr/bin/python3
 # popout3d.py
 
 '''
+
+BUGS:
+  All doesn't work until New, All buttons have been pressed.
+
+MINOR:
+  What is FIRSTIMAGE variable for? 
+  If there's only one file in a set, there's no error message.
+  ORDER IN PANELS NOT ALPHABETIC
+  Deleting leaves blank when scanning, need to redo list but keep same position.
+
 --------------------------------------------------------------------------------
 Popout3D Stereo Image Creation
 
@@ -104,14 +114,16 @@ Fix radio buttons.
 
 V1.5.0 2019 
 Fix variable name in popout3d_spawn.py.
-Email address on startup image. Change website from Launchpad to GitHub.
+Email address on startup image.
 No need to import 'time'.
-Only need hugin-tools not hugin in Debian dependencies.
+Change Folder references to standard /usr/bin and /usr/share/<name>.
+Only need hugin-tools in Debian dependencies, not hugin.
 in _spawn remove A from RGBA and transparency mask. Has PIL changed?
 Change from deprecated os.system to subprocess.run().
-Compare version number from data file and program.
-Remove confusion about folder/set - on start button, title display, view choices
-Fix deleting an image clearing set name.
+Change website from Launchpad to GitHub.
+Make sure version in data file and program match.
+Remove confusion about folder/set - Start button, title display, view choices.
+Fixed deleting clears set name.
 
 '''
 
