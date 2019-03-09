@@ -1,0 +1,15 @@
+11809443a4f3706b3bba09dd1b16d850  usr/bin/popout3d
+cc312ff448f4ff322ec511e7d4c8d8c6  usr/lib/python3/dist-packages/popout3d-1.5.0.egg-info/PKG-INFO
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/popout3d-1.5.0.egg-info/dependency_links.txt
+d41d8cd98f00b204e9800998ecf8427e  usr/lib/python3/dist-packages/popout3d-1.5.0.egg-info/requires.txt
+68b329da9893e34099c7d8ad5cb9c940  usr/lib/python3/dist-packages/popout3d-1.5.0.egg-info/top_level.txt
+7d82f9bef4cc5fa96a6bcc56ffeeaf72  usr/share/applications/popout3d.desktop
+5a52ce4f56156cd85cec66d26151e21f  usr/share/doc/popout3d/changelog.gz
+0119b49267ad0268246a78c152868a0d  usr/share/doc/popout3d/copyright
+ced7798c769a907ca6761e48f4a0347d  usr/share/man/man1/popout3d.1.gz
+35a599474b296809974e0d70a25898bf  usr/share/popout3d/popout3d.dat
+0b64aaa00e20e5eea5094289a65fc2e6  usr/share/popout3d/popout3d.glade
+7b7106a84012448a8b0230cbd40a9e6a  usr/share/popout3d/popout3d_about.png
+cfabfaba1f3d1edacfbc67d7f8cc8869  usr/share/popout3d/popout3d_logo.png
+41d2fe4bd7715dc3aa2a5b58e9931e6f  usr/share/popout3d/popout3d_spawn
+eff15ca6ca19ad6ac7336d8908ce4028  usr/share/popout3d/popout3d_start.png

@@ -1,0 +1,42 @@
+name: popout3d      # you probably want to 'snapcraft register <name>'
+version: '1.5.0'
+summary: Creates 3D images from photographs taken with an ordinary camera.
+description: |
+  Take a set of photos of a subject and the software will create a 3D image
+  from each pair of photos in the set, so that you can choose the best.
+  Vertical and rotational alignment of the left and right images is essential for a
+  convincing 3D effect, but difficult to achieve with an ordinary camera. The software 
+  corrects any misalignment.
+  Formats available are anaglyph (red/cyan), side-by-side and crossover.
+  Several sets of photos can be processed at once, they can be previewed and poor ones can
+  be deleted.
+
+grade: devel # Start 'devel'. must be 'stable' to release into candidate/stable channels
+confinement: devmode # Start 'devmode'. use 'strict' once you have the right plugs and slots
+base: core18
+icon: popout3d_logo.png
+
+parts:
+
+  archives:                  
+    plugin: nil
+    stage-packages:
+      - libc6
+      - python-pil
+      #- popout3d ####NOT IN EARLIER
+
+  deb:
+    plugin: dump
+    source: popout3d_1.5.0_all.deb
+
+  
+  #env:
+  #  plugin: dump
+  #  organize:
+  #    popout3d.wrapper: /usr/bin/popout3d
+  
+  
+apps:
+  popout3d:
+    command: popout3d
+
