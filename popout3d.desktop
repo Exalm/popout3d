@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Popout3D
+Version=1.5.0
+Exec=/snap/popout3d/current/usr/bin/popout3d
+Comment=A 3D image creator
+Icon=/snap/popout3d/current/usr/share/popout3d/popout3d_logo.png
+Type=Application
+Terminal=false
+StartupNotify=true
+Categories=Graphics
