@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Popout3D
 Version=1.5.0
-Exec=/app/bin/popout3d
+Exec=popout3d
 Comment=A 3D image creator
 Icon=/usr/share/popout3d/popout3d_logo.png
 Type=Application
