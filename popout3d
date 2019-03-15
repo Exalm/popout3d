@@ -1,0 +1,852 @@
+#! /usr/bin/python3
+# popout3d.py
+
+'''
+--------------------------------------------------------------------------------
+Popout3D Stereo Image Creation
+
+Copyright 2015-2019 Chris Rogers <popout3d@yahoo.com>
+
+GNU GENERAL PUBLIC LICENSE GPLv3
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have a copy of the GNU General Public License
+    in /usr/share/common-licenses/GPL-3. If not, 
+    see <http://www.gnu.org/licenses/>.
+
+V1.5.0 2019 
+Fix variable name in spawn
+In spawn remove A from RGBA and transparency mask. Has PIL changed?
+Email address on startup image. Change website from Launchpad to GitHub.
+No need to import 'time'.
+Only need hugin-tools not hugin in Debian dependencies.
+Change from deprecated os.system to subprocess.run().
+Compare version number from data file and program.
+Remove confusion about folder/set - on start button, title display, view choices
+Prepare viewlist at beginning.
+Reverse order of Help and About on Help menu.
+Rewrite Help to reflect new processing and clarify.
+Replace Forward and Back with > and <.
+Fix deleting an image.
+Tidy up at end.
+Remove queueing panel to leave only processing one.
+Remove redundant setprefs and firstview variables.
+Only show processing warnings once.
+Option to view Original images.
+Replace Quit button with Start button.
+'''
+
+import sys, os, shutil, subprocess #V1.5.0 , time
+
+from PIL import Image
+
+#V1.4.2
+try:
+    import gi
+except:
+    sys.exit('Failed to import gi')
+
+try:
+    gi.require_version('Gtk', '3.0')
+except:
+    sys.exit('gi wrong version')
+#V1.4.2
+
+from gi.repository import Gtk, GdkPixbuf
+# ******************************************************************************
+# create global variables and set default values
+
+version = 'Popout3D V1.5.0'            # program version #V1.5.0
+
+form = ''                              # format in words
+formlet = ''                           # first letter of format
+style = ''                             # style in words
+stylelet = ''                          # first letter of style
+stylecode = ''                         # style in align-image-stack code
+
+viewlist = []                          # list of images to view
+viewind = -1                           # array index of image to view
+
+homefold = os.getenv('HOME') + '/'     # get homefold folder
+
+'''#exalm
+progfold = '/usr/share/popout3d/'      # program #V1.5.0   
+
+preffold = homefold + '.popout3d/'     # folder for preference file
+workfold = homefold + '.popout3d/work/' # folder for images being worked on
+'''
+
+progfold = '/usr/share/popout3d/'      # program #V1.5.0   
+preffold = homefold + '.config/popout3d/'     # folder for preference file
+workfold = homefold + '.config/popout3d/work/' # folder for images being worked on
+#
+
+myfold = homefold                      # set current folder
+
+
+gladefile = 'popout3d.glade'           # V1.5.0     
+preffile = 'popout3d.dat'              # name of user preference file
+helpfile = 'popout3d_help.html'        # name of help file
+startfile = 'popout3d_start.png'       # name of image file shown at startup
+myfile = '{none}'                      # current file
+myext = '{none}'                       # current extension
+
+spawnprog = 'popout3d_spawn'           # spawned prog V1.5.0 remove .py Debian
+spawnout = 'out.txt'                   # spawn output
+lockfile = 'lock.ctrl'                 # name of lock file spawned progam
+quitfile = 'quit.ctrl'                 # file to tell spawned progam to quit
+
+scope = ''                             # whether processing Folder or set
+startimage = True                      # when start has shown change image size
+firstview = True                       #V1.4.2 first image after startimage
+
+warnings = ''                          #V1.5.0 processing warnings
+
+#----------
+# start in myfold folder
+os.chdir(myfold)                       
+
+def getPreferences():
+    global version, myfold, myfile, myext, form, formlet, style, stylelet, \
+      stylecode, view, scope
+
+    # create hidden folder
+    if not os.path.isdir(preffold):
+        result = os.system('mkdir '+ preffold)
+        if result != 0:
+            sys.exit(result)                                           
+
+    # create data folder
+    if os.path.isdir(workfold):
+        shutil.rmtree(workfold, True)
+
+    result = os.system('mkdir '+ workfold)
+    if result != 0:
+        sys.exit(result)
+
+    # copy default preferences file to preference folder
+    if not os.path.isfile(preffold + preffile):
+        shutil.copyfile(progfold + preffile, preffold + preffile)
+
+    # create preferences array
+    prefdata = []
+    for i in range(7):
+        prefdata.append('')
+
+    # load preferences file
+    with open(preffold + preffile, 'r') as infile:
+        for i in range(0, 7):
+            prefdata[i] = infile.readline() ; prefdata[i] = prefdata[i][:-1]
+            # take linefeed off end of string
+
+    # set preferences data
+    #V1.5.0 Any previous versions of data file will be overwritten
+    if prefdata[0] == version:
+        #
+        if os.path.exists(prefdata[1]):
+            myfold = prefdata[1]
+        else:
+            myfold = homefold
+
+        myfile = prefdata[2] ; myext = prefdata[3]
+        #V1.5.0
+        if myfile == '{none}':
+          scope = 'Folder'
+        else:
+          scope = 'Set'
+        #
+
+        if prefdata[4] in ['Anaglyph', 'Side-by-Side', 'Crossover']:
+            form = prefdata[4]
+        else:
+            form = 'Anaglyph'
+
+        if prefdata[5] in ['Level','Popout']:
+            style = prefdata[5]
+        else:
+            style = 'Level'
+
+        if prefdata[6] in ['Originals', 'All', 'New']: #V1.5.0
+            view = prefdata[6]
+        else:
+            view = 'All'
+
+    else:
+        # copy default preferences file and use standard values this time
+        shutil.copyfile(progfold + preffile, preffold + preffile)
+
+        myfold = homefold
+        myfile = '{none}'
+        myext = '{none}'
+        form = 'Anaglyph'
+        style = 'Level'
+        view = 'All'
+        
+        scope = 'Folder' #V1.5.0
+        
+    formlet = form[0:1] ; stylelet = style[0:1]
+    if style == 'Level':
+        stylecode = 'A'
+    else:
+        stylecode = 'P'
+
+def showTitle(self, message):
+    self.window.set_title(message) # gtk *****
+
+def showTip(self):
+    
+    if view == 'All':
+      self.labelViewingTitle.set_label('All 3D Images') # gtk *****
+    elif view == 'New': 
+      self.labelViewingTitle.set_label('New 3D Images') # gtk *****
+    else: # V1.5.0 Originals  
+      self.labelViewingTitle.set_label('Original Images') # gtk *****
+
+def clearImage(self):
+    # gtk **********************************************************************
+    self.image1.clear()
+    self.labelImage1.set_text('')
+    # **************************************************************************
+
+def showMessage(self, which, message):
+    # gtk **********************************************************************
+    if which == 'warn':
+        self.messageWarning.format_secondary_text(message)
+        self.result = self.messageWarning.run() ; self.messageWarning.hide()
+    else: # 'ask'
+        self.messageQuestion.format_secondary_text(message)
+        self.result = self.messageQuestion.run() ; self.messageQuestion.hide()
+        if self.result == Gtk.ResponseType.YES:
+            return('Y')
+        else:
+            return('N')
+        
+    # **************************************************************************
+
+#===============================================================================
+# progress panels GTK - no Qt written
+def showProgress(self): 
+    #V1.5.0 re-arranged from Folder/Set/All to All/New. templist sorted
+    #local variables templist temptext
+    
+    showTip(self)
+    # queuing panel
+    if view == 'New':
+        # queuing
+        templist = []
+        for filename in os.listdir(workfold):
+            newfile, newext = os.path.splitext(filename) 
+            if newext == '.queue':
+                templist.append(newfile)
+        templist = sorted(templist)
+        
+        temptext = '' ; 
+        for newfile in templist:
+            temptext = temptext + '3D'+newfile+'\n'
+        self.labelProcessing.set_text(temptext) 
+        
+    else: #V1.5.0 All
+        self.labelProcessing.set_text('') 
+  
+    # viewing panel
+    temptext = ''
+    for i in viewlist:
+        if view == 'Originals': # 2D
+            f = i[0]+'.'+i[1]
+        else: # All or Set (3D)
+            f = '3D'+i[0]+'.'+i[1]
+        temptext = temptext + f +'\n'
+    self.labelViewing.set_text(temptext) 
+
+#===============================================================================
+# make list of viewable 3D images, merge one aligned pair if available
+def makeViewlist(self):
+    global viewlist, viewind
+    #local variables nf, nx
+    clearImage(self)
+    viewlist = []
+
+    if view == 'New': 
+        # only list those which spawn has created a .view file for 
+        # doesn't make any difference whether have chosen folder or set
+        # foldlist = '' #V1.4.1
+        for filename in os.listdir(workfold):
+            nf, nx = os.path.splitext(filename)
+            if nx == '.view': #remove the extra extension
+                nnf, nnx = os.path.splitext(nf)
+                viewlist.append([nnf, nnx[1:]])
+
+    elif view == 'All': 
+        for newfile in os.listdir(myfold):
+            if (newfile[0:2] == '3D'
+              and (newfile.endswith('.jpg') or newfile.endswith('.JPG')
+              or newfile.endswith('.tiff') or newfile.endswith('.TIFF')
+              or newfile.endswith('.tif') or newfile.endswith('.TIF')
+              or newfile.endswith('.png') or newfile.endswith('.PNG'))):
+                nf, nx = os.path.splitext(newfile)
+ 
+                # only add files in set to viewlist
+                if (scope == 'Set'
+                  and myfile == nf[2:len(myfile)+2] and myext == nx[1:]):
+                    viewlist.append([nf[2:], nx[1:]])
+                    
+                # add all files in folder to viewlist
+                elif scope == 'Folder':
+                    viewlist.append([nf[2:], nx[1:]])
+                
+    else: # V1.5.0 Originals  
+        for newfile in os.listdir(myfold):           
+            if (newfile[0:2] != '3D'
+              and (newfile.endswith('.jpg') or newfile.endswith('.JPG')
+              or newfile.endswith('.tiff') or newfile.endswith('.TIFF')
+              or newfile.endswith('.tif') or newfile.endswith('.TIF')
+              or newfile.endswith('.png') or newfile.endswith('.PNG'))):
+                nf, nx = os.path.splitext(newfile)
+                # only add files in set to viewlist
+                if (scope == 'Set'
+                  and myfile == nf[0:len(myfile)] and myext == nx[1:]):
+                    viewlist.append([nf, nx[1:]])
+                                    
+                # add all files in folder to viewlist
+                elif scope == 'Folder':
+                    viewlist.append([nf, nx[1:]])
+                
+    viewlist = sorted(viewlist)
+    viewind = 0
+
+#===============================================================================
+# View image #V1.4.2
+def viewImage(self, filename):
+    global startimage
+    #local variables width, height
+    #passed variable filename
+    # get size of window
+
+    if startimage == True:
+        self.labelImage1.set_text('') #V1.4.2
+        width = 2000 ; height = 750
+        startimage = False
+    else:
+        self.labelImage1.set_text(filename) #V1.4.2
+        allocation = self.alignment1.get_allocation()
+        width = allocation.width-10; height = allocation.height-10
+
+    # retrieve image and adjust
+    # parameters are file, width, height, preserve_active_ratio
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename, width, height, True) 
+    self.image1.set_from_pixbuf(pixbuf)
+# ******************************************************************
+        
+#===============================================================================
+# Check value of viewlist indicator, then show image #V1.4.2 find image
+def findImage(self): #V1.4.2
+    global viewind
+
+    # make sure viewing list indicator hasn't gone off the end
+    if viewind < 0:
+        viewind = 0
+    elif viewind > len(viewlist) -1:
+        viewind = len(viewlist) -1
+
+    # provided viewing list isn't empty, select currently indicated image from 
+    #the viewlist #V1.4.2 and show it.
+    if len(viewlist) > 0:
+        if (view == 'Originals'
+          and os.path.isfile(myfold+viewlist[viewind][0]+'.'+viewlist[viewind][1])):
+            viewImage(self, myfold+viewlist[viewind][0]+'.'+viewlist[viewind][1])
+        if (view in ['All', 'New']
+          and os.path.isfile(myfold+'3D'+viewlist[viewind][0]+'.'+viewlist[viewind][1])):
+            viewImage(self, myfold+'3D'+viewlist[viewind][0]+'.'+viewlist[viewind][1])
+
+
+#===============================================================================
+# check each pair of images is valid, then write a .queue file
+def processPair(self, newfile, newext, leftn, rightn):
+
+    imageL = myfold+newfile+str(leftn)+'.'+newext
+    imageR = myfold+newfile+str(rightn)+'.'+newext
+
+    # open images and get image type and size
+    try:
+        img = Image.open(imageL)
+    except:
+        print ('Unable to load left image')
+        sys.exit()
+    img.load()
+    imageLF = img.format ; imageLS = img.size
+
+    try:
+        img = Image.open(imageR)
+    except:
+        print ('Unable to load right image')
+        sys.exit()
+    img.load()
+    imageRF = img.format ; imageRS = img.size
+
+    # if images match on type and size align them,
+    # otherwise warn they are incompatible and skip them
+    if imageLF == imageRF and imageLS == imageRS:
+
+        # if there are no lock files, call the alignment program
+        # Quotes used around filenames to deal with special characters like "("
+
+        queuefile = workfold+newfile+str(leftn)+'+'+str(rightn)+formlet+stylelet+'.'+newext+'.queue'
+        if not os.path.isfile(queuefile):
+            with open(queuefile, 'w') as fn:
+                fn.write('')
+            #showstatus(self,'new','To update the progress panels press [Forward]. ') #V1.4.2
+
+    else:
+        if imageLF != imageRF:
+            showMessage(self,  'warn', newfile+str(leftn)+'.'+newext + ' and ' + newfile+str(rightn)+'.'+newext + ' can not be used as they have different filetypes. ')
+        if imageLS != imageRS:
+            showMessage(self, 'warn', newfile+str(leftn)+'.'+newext + ' and ' + newfile+str(rightn)+'.'+newext + ' can not be used as they are different sizes. ')
+
+#===============================================================================
+# loop through set of images to call processPair for each valid pair
+def processSet(self, newfile, newext):
+    # global statusmessage #V1.4.2
+
+    global warnings #V1.5.0
+
+    # find out how many images there are in this set
+    imagestodo = 0 # count of number of input files
+    for i in range (0, 9):
+        if os.path.isfile(myfold+newfile+str(i)+'.'+newext):
+            imagestodo = imagestodo + 1
+
+    # if there are at least two images in the set,
+    # repeatedly call processPair to process them, 
+    # otherwise warning statusmessage
+    if imagestodo == 0:
+        #V1.5.0 showsMessage(self, 'warn', 'There are no suitable images in the set ' + newfile + '*.' + newext + '. ')
+        if 'have no suitable images' not in warnings:
+            warnings = warnings + 'Some or all image sets have no suitable images.\n'
+                     
+    elif imagestodo == 1:
+        #V1.5.0 showMessage(self, 'warn', 'There is only one file in the set ' + newfile + '*.' + newext + ', at least two are needed. ')
+        if 'only have one image' not in warnings:
+            warnings = warnings + 'Some or all image sets only have one image, two are needed.\n'
+    else:
+        # loop through all valid image pairs
+
+        leftn = 0 ; rightn = 1 # left and right image numbers
+        while leftn < 9: # can only deal with single digit image numbers
+
+            rightn = leftn + 1
+            while rightn < 10: # highest possible image number is 9
+                # if both left and right images exist and there is no existing 3D one
+                if (os.path.isfile(myfold+newfile+str(leftn)+'.'+newext) and os.path.isfile(myfold+newfile+str(rightn)+'.'+newext)
+                  and not os.path.isfile(myfold+'3D'+newfile+str(leftn)+'+'+str(rightn)+formlet+stylelet+'.'+newext)):
+                    processPair(self, newfile, newext, leftn, rightn)
+
+                # both files exist but so does a 3D file so do nothing
+                elif (os.path.isfile(myfold+newfile+str(leftn)+'.'+newext) and os.path.isfile(myfold+newfile+str(rightn)+'.'+newext)
+                  and os.path.isfile(myfold+'3D'+newfile+str(leftn)+'+'+str(rightn)+formlet+stylelet+'.'+newext)):
+                    #V1.5.0 
+                    if 'already have a 3D image' not in warnings:
+                        warnings = warnings + 'Some or all image sets already have a 3D image.\n'
+                    #               
+                rightn = rightn + 1
+            leftn = leftn + 1
+
+#===============================================================================
+# qt ***************************************************************************
+# Load the UI, define UI class and actions
+class GUI:
+    def __init__(self):
+        global startimage #V1.5.0 firstview, setprefs
+        self.glade = progfold+gladefile
+        
+        self.builder = Gtk.Builder()
+        self.builder.add_from_file(self.glade)
+        #
+        
+        self.window = self.builder.get_object('window1')
+        self.labelImage1 = self.builder.get_object('labelImage1')
+        self.window.show()
+        self.builder.connect_signals(self)
+
+
+        #self.labelStatusbar = self.builder.get_object('labelStatusbar') #V1.4.2
+        self.labelProcessing = self.builder.get_object('labelProcessing')
+        #self.labelQueueing = self.builder.get_object('labelQueueing') #V1.5.0 single panel
+        self.labelViewing = self.builder.get_object('labelViewing')
+        self.labelViewingTitle = self.builder.get_object('labelViewingTitle')
+
+        self.messageQuestion = self.builder.get_object('messagedialogQuestion')
+        self.messageWarning = self.builder.get_object('messagedialogWarning')
+        self.dialogboxAbout = self.builder.get_object('dialogboxAbout')
+        self.dialogHelp = self.builder.get_object('dialogHelp')
+        self.image1 = self.builder.get_object('image1')
+
+        #V1.4.2 for available size
+        self.alignment1 = self.builder.get_object('alignment1') 
+
+        self.labelBack = self.builder.get_object('buttonBack')
+        self.labelForward = self.builder.get_object('buttonForward')
+
+        self.activeAnaglyph = self.builder.get_object('radiobuttonAnaglyph')
+        self.activeSidebyside = self.builder.get_object('radiobuttonSidebyside')
+        self.activeCrossover = self.builder.get_object('radiobuttonCrossover')
+
+        self.activeLevel = self.builder.get_object('radiobuttonLevel')
+        self.activePopout = self.builder.get_object('radiobuttonPopout')
+        #V1.5.0
+        self.activeOriginals = self.builder.get_object('radiobuttonOriginals')
+        self.activeAll = self.builder.get_object('radiobuttonAll')
+        self.activeNew = self.builder.get_object('radiobuttonNew')
+        #self.activeFolder = self.builder.get_object('radiobuttonFolder')
+        #self.activeSet = self.builder.get_object('radiobuttonSet')
+
+        # **********************************************************************        
+
+        # set preference variables and set title
+        getPreferences()
+        #V1.5.0     
+        #showTitle(self, version + '          Folder: ' + myfold 
+        #+ '          File Set: ' + myfile + '*.' + myext)
+        if scope == 'Folder':
+          showTitle(self, version + '          Folder: ' + myfold)
+        else:
+          showTitle(self, version + '          Set: ' + myfile + '*.' + myext)
+        #
+        # gtk ******************************************************************
+        # activating any of these triggers the one activated and the one 
+        # de-activated
+        
+        if form == 'Anaglyph':
+            self.activeAnaglyph.set_active(True)
+        elif form == 'Side-by-Side':
+            self.activeSidebyside.set_active(True)
+        else:
+            self.activeCrossover.set_active(True)
+
+        if style == 'Level':
+            self.activeLevel.set_active(True)
+        else:
+            self.activePopout.set_active(True)
+        
+        #V1.5.0 setprefs = True
+        if view == 'Originals':
+            self.activeOriginals.set_active(True)        
+        elif view == 'New':
+            self.activeNew.set_active(True)
+        else: # view == 'All'
+            self.activeAll.set_active(True)
+ 
+        makeViewlist(self) 
+ 
+        self.window.maximize() #V1.4.2
+
+        # start image
+        if os.path.isfile(progfold+startfile):
+            viewImage(self, progfold+startfile) #V1.4.2
+              
+    # ==========================================================================
+    # definitions ==============================================================
+
+    # gtk **********************************************************************
+    def on_window1_destroy(self, object): # close window with 0 or X
+        with open(workfold+quitfile, 'w') as fn: # create quit file
+            fn.write('')    
+        Gtk.main_quit()
+
+    def imagemenuitemQuit(self, menuitem): # quit with File>Quit
+        with open(workfold+quitfile, 'w') as fn:
+            fn.write('')    
+        Gtk.main_quit()
+
+    # **************************************************************************
+    
+    # menu bar choose folder
+    def imagemenuitemFolder(self, menuitem):
+        global myfold, myfile, myext, scope # statusmessage #V1.4.2 #V1.5.0 scope
+        scope = 'Folder' #V1.5.0
+        # qt *******************************************************************
+        # newfold = Qtmenuitems.QFileDialog.getExistingDirectory(self, 'Select the Folder where the images are', directory = homefold) 
+        # gtk ******************************************************************
+        filechooserdialog = Gtk.FileChooserDialog(title='Select the Folder where the images are',
+          action=Gtk.FileChooserAction.SELECT_FOLDER,
+          parent=self.window,
+          buttons=["Cancel", Gtk.ResponseType.CANCEL, "Select",Gtk.ResponseType.OK])
+        filechooserdialog.set_current_folder (myfold)
+        response = filechooserdialog.run()    
+        filechooserdialog.hide()
+
+        if response == Gtk.ResponseType.OK:
+            newfold = filechooserdialog.get_filename()
+        else: # answered No or closed window
+            newfold = '{none}'   
+        
+        # **********************************************************************
+        newfold = newfold+'/'
+        if newfold[0:len(homefold)] == homefold:
+            # filename is Originals name less ending digit
+            # as it may be a set which is not in the new folder
+            myfold = newfold; os.chdir(myfold) 
+            myfile = '{none}' ;  myext = '{none}' 
+        else:
+            showMessage(self, 'warn', 'Folder not changed')
+
+        #showTitle(self, version + '          Folder: ' + myfold + '          File Set: ' + myfile + '*.' + myext) #V1.5.0
+        showTitle(self, version + '          Folder: ' + myfold)
+        # update viewlist
+        makeViewlist(self)
+        findImage(self)
+        showProgress(self)
+        
+    # menu bar choose set
+    def imagemenuitemSet(self, menuitem):
+        global myfold, myfile, myext, scope # statusmessage #V1.4.2#V1.5.0 scope
+        scope = 'Set' #V1.5.0
+
+        filechooserdialog = Gtk.FileChooserDialog(title="Select any file from a set of images",
+          action=Gtk.FileChooserAction.OPEN, 
+          parent=self.window,
+          buttons=["Cancel", Gtk.ResponseType.CANCEL, "Select",Gtk.ResponseType.OK])
+        filechooserdialog.set_current_folder (myfold)
+        fileFilter = Gtk.FileFilter() ; fileFilter.add_pattern('*.JPG') ; fileFilter.set_name('Image files') ; filechooserdialog.add_filter(fileFilter)
+        response = filechooserdialog.run()    
+        filechooserdialog.hide()
+        
+        if response == Gtk.ResponseType.OK:
+            newfile = filechooserdialog.get_filename()
+        else: # answered No or closed window
+            newfile = '{none}'   
+        
+        # **********************************************************************
+
+        if newfile[0:len(homefold)] == homefold:
+            newfold, newfile = os.path.split(newfile)
+            if newfile[0:2] != '3D':
+                os.chdir(newfold)
+                newfile, newext = os.path.splitext(newfile)
+                if newfile[len(newfile)-1:] in ['0','1','2','3','3','5','6','7','8','9']:
+                    myfold = newfold +'/' ; myfile = newfile[:-1]; myext = newext[1:] # filename is Originals name less ending digit
+                else:
+                    showMessage(self, 'warn', 'Filename must end in a digit.')       
+
+        if myfile == '':
+            myfile = '{none}' ; myext = '{none}'
+            showMessage(self, 'warn', 'No file selected')
+        else:
+            #showTitle(self, version + '          Folder: ' + myfold + '          File Set: ' + myfile + '*.' + myext) #V1.5.0 
+            showTitle(self, version + '          Set: ' + myfile + '*.' + myext)
+            #end
+            # update viewlist
+            makeViewlist(self)
+            findImage(self)
+            showProgress(self)
+
+    # menu bar save preferences
+    def imagemenuitemPreferences(self, menuitem):
+        result = showMessage(self, 'ask', 'This will save your current settings as the defaults.')
+        if result == 'Y':
+            with open(preffold + preffile, 'w') as fn:
+                fn.write(version+'\n')
+                fn.write(myfold+'\n')
+                fn.write(myfile+'\n')
+                fn.write(myext+'\n')
+                fn.write(form+'\n')
+                fn.write(style+'\n')
+                fn.write(view+'\n')
+
+    # menu bar help
+    def imagemenuitemHelp(self, menuitem):
+
+        # Gtk*******************************************************************
+        self.response = self.dialogHelp.run() ; self.dialogHelp.hide()
+        # **********************************************************************
+
+    # menu bar about
+    def imagemenuitemAbout(self, menuitem):
+
+        # gtk ******************************************************************
+        
+        self.response = self.dialogboxAbout.run() ; self.dialogboxAbout.hide()
+        
+        # **********************************************************************
+        
+    # form actions
+    def radiobuttonAnaglyph(self, menuitem):
+        global form, formlet
+        if menuitem.get_active():
+            form = 'Anaglyph' ; formlet = 'A'
+
+    def radiobuttonSidebyside(self, menuitem):
+        global form, formlet
+        if menuitem.get_active():
+            form = 'Side-by-Side' ; formlet = 'S'
+
+    def radiobuttonCrossover(self, menuitem):
+        global form, formlet
+        if menuitem.get_active():
+            form = 'Crossover' ; formlet = 'C'
+
+    # style actions
+    def radiobuttonLevel(self, menuitem):
+        global style, stylelet, stylecode
+        if menuitem.get_active():
+            style = 'Level' ; stylelet = 'L' ; stylecode = 'A'
+
+    def radiobuttonPopout(self, menuitem):
+        global style, stylelet, stylecode
+        if menuitem.get_active(): 
+            style = 'Popout' ; stylelet = 'P' ; stylecode = 'P'
+
+    #V1.5.0 Start button replaced Folder and Set buttons
+    def buttonStart(self, menuitem):
+        global warnings #V1.5.0
+        # check processing isn't already running
+        if os.path.isfile(workfold+lockfile):
+            # showstatus(self,'new','Processing already running.') #V1.4.2
+            showMessage(self, 'warn', 'Processing already running.') #V1.4.2
+        else:
+            #V1.5.0 clear any hanging over .queue files
+            for wholefilename in os.listdir(workfold):
+                fn, fx = os.path.splitext(wholefilename) 
+                if (fx == '.queue') :
+                    os.remove(workfold+wholefilename)
+
+            #clearImage(self) V1.5.0
+            todolist = []; 
+
+            if scope == 'Folder': # store one filename for each set in todolist
+                for newfile in os.listdir(myfold):
+                    if (newfile[0:2] != '3D' and
+                            (newfile.endswith('.jpg') or newfile.endswith('.JPG')
+                            or newfile.endswith('.tiff') or newfile.endswith('.TIFF')
+                            or newfile.endswith('.tif') or newfile.endswith('.TIF')
+                            or newfile.endswith('.png') or newfile.endswith('.PNG'))):
+                        newfile, newext = os.path.splitext(newfile)
+                        if newfile[-1:] in ['0','1','2','3','3','5','6','7','8','9'] and [newfile[:-1], newext[1:]] not in todolist:
+                            todolist.append([newfile[:-1], newext[1:]])
+                            
+            else: #scope ='Set' store one filename for the set in todolist
+                if myfile != '{none}' and myext != '{none}':
+                    todolist.append([myfile, myext])
+           
+            if todolist != []:
+
+                todolist = sorted(todolist)
+                warnings = ''
+                for newfile in todolist:
+                    # filename style is name less last digit (no 3D at start)
+                    processSet(self, newfile[0], newfile[1])
+
+                with open(workfold+spawnout, 'w') as f: # output to text file
+                    # run spawnprog
+                    subprocess.Popen([progfold+spawnprog, workfold, myfold, lockfile, quitfile], stdout = f) #V1.5.0 add lockfile, quitfile
+
+            else: #V1.5.0
+                showsMessage(self, 'warn', 'Some or all image sets have no suitable images.')
+
+            #V1.5.0 only show 1 message if pre-existing files and 0 to process
+            showMessage(self, 'warn', warnings)
+            
+            # remove .view files #V1.4.1
+            for fn in os.listdir(workfold):
+                dummy, fx = os.path.splitext(fn) 
+                if fx == '.view':
+                    os.remove(workfold+fn)
+
+            #?V1.5.0makeViewlist(self)
+            showProgress(self)
+
+    #V1.5.0 added
+    def radiobuttonOriginals(self, menuitem):
+        global view #V1.5.0, setprefs
+        if menuitem.get_active():
+            view = 'Originals'
+            makeViewlist(self)
+            #V1.5.0 #if not setprefs: setprefs = False findImage(self)
+            findImage(self)
+            #
+            showProgress(self)
+
+    #V1.5.0 added
+    def radiobuttonAll(self, menuitem):
+        global view #V1.5.0, setprefs
+        if menuitem.get_active():
+            view = 'All'
+            makeViewlist(self)
+            #V1.5.0 #if not setprefs: setprefs = False findImage(self)
+            findImage(self)
+            #
+            showProgress(self)
+
+    def radiobuttonNew(self, menuitem):
+        global view #V1.5.0, setprefs
+        if menuitem.get_active():
+            view = 'New'
+            makeViewlist(self)
+            #V1.5.0 #if not setprefs: setprefs = False findImage(self)
+            findImage(self)
+            #
+            showProgress(self)
+
+        
+    def buttonBack(self, menuitem):
+        global viewind        
+        viewind = viewind - 1
+        findImage(self)
+        showProgress(self)
+
+    def buttonForward(self, menuitem):
+        global viewind, firstview     
+
+        if view == 'New':
+            makeViewlist(self) 
+
+        if firstview == True:
+            viewind = 0
+            firstview = False
+        else:
+            viewind = viewind + 1
+
+        findImage(self)
+        showProgress(self)
+
+    def buttonDelete(self, menuitem):
+        # filename style of finished file, but 3D at beginning has to be added
+        global viewind, firstview #V1.5.0
+        if os.path.isfile(workfold+lockfile):
+            showMessage(self, 'warn', 'Can not delete images while processing is running.') #V1.5.0
+        elif view == 'Originals':
+            showMessage(self, 'warn', 'Can not delete original images.') #V1.5.0
+        else:    
+            if viewind > -1:
+                if os.path.isfile(myfold+'3D'+viewlist[viewind][0]+'.'+viewlist[viewind][1]):
+                    #result = Qtmenuitems.QMessageBox.question(self, 'Delete file.', 'Delete ' + myfold+'3D'+viewlist[viewind][0]+'.'+viewlist[viewind][1] + '?', Qtmenuitems.QMessageBox.No, Qtmenuitems.QMessageBox.Yes)
+                    result = showMessage(self, 'ask', 'Delete ' + myfold+'3D'+viewlist[viewind][0]+'.'+viewlist[viewind][1] + '?')
+                    if result == 'Y': # Yes
+                        clearImage(self) #V1.4.2
+                        #V1.5.0 rest
+                        try: 
+                            os.remove(myfold+'3D'+viewlist[viewind][0]+'.'+viewlist[viewind][1])
+                        except:
+                            showMessage(self,  'warn', 'File already deleted.')
+
+                        # remember position before rewriting list
+                        oldviewind = viewind        
+                        makeViewlist(self) 
+                        viewind = oldviewind
+
+                        findImage(self)
+                        showProgress(self)
+
+if __name__ == '__main__':
+    main = GUI()
+    Gtk.main()
+
+# ******************************************************************************
