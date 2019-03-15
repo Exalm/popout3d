@@ -1,3 +1,0 @@
-#!/bin/sh
-exec $SNAP/usr/bin/popout3d --datadir $SNAP/usr/share/popout3d $@
-
