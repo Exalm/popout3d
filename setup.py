@@ -5,7 +5,7 @@ setup(
     packages=find_packages(),                     
     scripts=['popout3d'],
     
-    install_requires=['python3-pillow'],
+    install_requires=['PIL'],
     python_requires='>=3',
     #platform='OPTIONS UNKNOWN',
     #package_data={'': ['*.png']},               #ONLY TEXT OR RST OR MSG
