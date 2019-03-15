@@ -87,7 +87,7 @@ workfold = homefold + '.popout3d/work/' # folder for images being worked on
 $XDG_DATA_HOME defines the base directory relative to which user specific data files should be stored. If $XDG_DATA_HOME is either not set or empty, a default equal to $HOME/.local/share should be used.
 $XDG_CONFIG_HOME defines the base directory relative to which user specific configuration files should be stored. If $XDG_CONFIG_HOME is either not set or empty, a default equal to $HOME/.config should be used.
 '''
-progfold = '/usr/share/popout3d/'      # program #V1.5.0   
+progfold = '@pkgdatadir@'              # program #V1.5.0
 homefold = os.getenv('HOME') + '/'     # get homefold folder
 
 if os.path.isdir('XDG_DATA_HOME'):
