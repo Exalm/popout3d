@@ -1,21 +1,21 @@
-app-id: com.github.popout3d.popout3d
+app-id: com.github.PopoutApps.popout3d
+
 runtime: org.gnome.Platform
-runtime-version: "3.30"
+runtime-version: "3.36"
 sdk: org.gnome.Sdk
+
 command: popout3d
 rename-desktop-file: popout3d.desktop
 rename-icon: popout3d_logo
 copy-icon: true
 finish-args:
   - --share=ipc
-  - --socket=x11
+  - --socket=fallback-x11
   - --socket=wayland
-  - --filesystem=xdg-run/dconf
-  - --filesystem=~/.config/dconf:ro
-  - --talk-name=ca.desrt.dconf
-  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --filesystem=host:rw
+  
 modules:
+
   - name: python3-pillow
     buildsystem: simple
     build-commands:
@@ -28,9 +28,10 @@ modules:
         url: https://files.pythonhosted.org/packages/5d/e1/d298934cd78984a5e8d616945349ed66a74b9df0337fb1941ce76b8a2b7b/Pillow-PIL-0.1dev.tar.gz
         sha256: d80ee30805f10bf898df9ce7495f46e88990e8f90b5c2b917722d87526252b2c
 
-  # Hugin deps
+  # align_image_stack deps
   - shared-modules/glew/glew.json
-  - shared-modules/glu/glu-9.0.0.json
+  - shared-modules/glu/glu-9.json
+  
   - name: wxWidgets
     cleanup:
       - /bin
@@ -152,8 +153,11 @@ modules:
       - /lib/liblocalfeatures*
       - /share
 
+
+
   - name: popout3d
     buildsystem: meson
     sources:
       - type: git
-        url: https://github.com/popout3d/popout3d
+        tag: submissionB 
+        url: https://github.com/PopoutApps/popout3d

@@ -1,0 +1,430 @@
+========================================================================
+Building module align_image_stack in /home/chris/.flatpak-builder/build/align_image_stack-2
+========================================================================
+-- The C compiler identification is GNU 9.3.0
+-- The CXX compiler identification is GNU 9.3.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc - works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ - works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Current HG revision is 5abfb4de7961
+-- Assuming this is a tarball (release) build for 2018.0.0
+-- Looking for log1p
+-- Looking for log1p - found
+-- Found wxWidgets: -L/app/lib;-pthread;;;-lwx_gtk3u_xrc-3.0;-lwx_gtk3u_html-3.0;-lwx_gtk3u_qa-3.0;-lwx_gtk3u_adv-3.0;-lwx_gtk3u_core-3.0;-lwx_baseu_xml-3.0;-lwx_baseu_net-3.0;-lwx_baseu-3.0 (found version "3.0.4") 
+-- Found TIFF: /usr/include
+-- Found JPEG: /usr/include
+-- Found ZLIB: /usr/include
+-- Found PNG: /usr/include
+-- WARNING: you are using the obsolete 'PKGCONFIG' macro, use FindPkgConfig
+-- Found PNG: /usr/include
+-- Found OPENEXR: /app/lib/libImath.so;/app/lib/libIlmImf.so;/app/lib/libIex.so;/app/lib/libHalf.so;/app/lib/libIlmThread.so;/usr/lib/x86_64-linux-gnu/libz.so
+-- Found VIGRA: /app/lib/libvigraimpex.so
+-- VIGRA version: 1.11.1
+-- WARNING: you are using the obsolete 'PKGCONFIG' macro, use FindPkgConfig
+-- Found Exiv2 release >= 0.12
+-- Found Exiv2: /app/lib/libexiv2.so
+CMake Warning (dev) at /usr/share/cmake-3.17/Modules/FindOpenGL.cmake:305 (message):
+  Policy CMP0072 is not set: FindOpenGL prefers GLVND by default when
+  available.  Run "cmake --help-policy CMP0072" for policy details.  Use the
+  cmake_policy command to set the policy and suppress this warning.
+
+  FindOpenGL found both a legacy GL library:
+
+    OPENGL_gl_LIBRARY: /usr/lib/x86_64-linux-gnu/libGL.so
+
+  and GLVND libraries for OpenGL and GLX:
+
+    OPENGL_opengl_LIBRARY: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+    OPENGL_glx_LIBRARY: /usr/lib/x86_64-linux-gnu/libGLX.so
+
+  OpenGL_GL_PREFERENCE has not been set to "GLVND" or "LEGACY", so for
+  compatibility with CMake 3.10 and below the legacy GL library will be used.
+Call Stack (most recent call first):
+  CMakeLists.txt:222 (FIND_PACKAGE)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+-- Found Glew: /app/lib/libGLEW.so
+-- Found X11: /usr/include   
+-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- libpano13 version: 2.9.19
+-- Looking for pthread.h
+CMake Warning (dev) at /usr/share/cmake-3.17/Modules/CheckIncludeFile.cmake:80 (message):
+  Policy CMP0075 is not set: Include file check macros honor
+  CMAKE_REQUIRED_LIBRARIES.  Run "cmake --help-policy CMP0075" for policy
+  details.  Use the cmake_policy command to set the policy and suppress this
+  warning.
+
+  CMAKE_REQUIRED_LIBRARIES is set to:
+
+    -lm
+
+  For compatibility with CMake 3.11 and below this check is ignoring it.
+Call Stack (most recent call first):
+  /usr/share/cmake-3.17/Modules/FindThreads.cmake:142 (CHECK_INCLUDE_FILE)
+  CMakeLists.txt:259 (FIND_PACKAGE)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE  
+-- Performing Test HAVE_STD_FILESYSTEM
+-- Performing Test HAVE_STD_FILESYSTEM - Failed
+-- Found Boost: /app/include (found suitable version "1.68.0", minimum required is "1.47") found components: filesystem system 
+-- Found LCMS2: /usr/include
+-- flann library not found. falling back to included copy
+-- Found FFTW: /usr/include
+-- Found FFTW library. Activated support for FFT fast cross correlation used by fine-tune feature.
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5")  
+-- Compiler supports OpenMP. Activating support for it.
+-- Found SQLite3: /usr/include
+-- Using shared internal libraries
+-- Current source dir = /run/build/align_image_stack
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /run/build/align_image_stack/_flatpak_build
+[10/304] Building CXX object src/celeste/CMakeFiles/celeste.dir/Utilities.cpp.o
+../src/celeste/Utilities.cpp: In function ‘void celeste::FileCreateError(char*)’:
+../src/celeste/Utilities.cpp:195:8: warning: ignoring return value of ‘char* getcwd(char*, size_t)’, declared with attribute warn_unused_result [-Wunused-result]
+  195 |  getcwd( folder, FILENAME_MAX );
+      |  ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+../src/celeste/Utilities.cpp: In function ‘void celeste::FileOpenError(char*)’:
+../src/celeste/Utilities.cpp:204:8: warning: ignoring return value of ‘char* getcwd(char*, size_t)’, declared with attribute warn_unused_result [-Wunused-result]
+  204 |  getcwd( folder, FILENAME_MAX );
+      |  ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+[13/304] Building C object src/foreign/levmar/CMakeFiles/huginlevmar.dir/misc.c.o
+In file included from ../src/foreign/levmar/misc.c:64:
+../src/foreign/levmar/misc_core.c: In function ‘dlevmar_covar’:
+../src/foreign/levmar/misc_core.c:577:2: warning: #warning LAPACK not available, LU will be used for matrix inversion when computing the covariance; this might be unstable at times [-Wcpp]
+  577 | #warning LAPACK not available, LU will be used for matrix inversion when computing the covariance; this might be unstable at times
+      |  ^~~~~~~
+[42/304] Building CXX object src/hugin_base/CMakeFiles/huginbase.dir/hugin_utils/platform.cpp.o
+In file included from ../src/hugin_base/hugin_utils/platform.cpp:34:
+/usr/include/x86_64-linux-gnu/sys/sysctl.h:21:2: warning: #warning "The <sys/sysctl.h> header is deprecated and will be removed." [-Wcpp]
+   21 | #warning "The <sys/sysctl.h> header is deprecated and will be removed."
+      |  ^~~~~~~
+[115/304] Building CXX object src/tools/CMakeFiles/hugin_hdrmerge.dir/__/deghosting/deghosting.cpp.o
+In file included from ../src/deghosting/deghosting.cpp:21:
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.h:87:71: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   87 |         virtual void loadImages(std::vector<std::string>& inputFiles) THROWNOIMAGESBADDIMENSION;
+      |                                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.h:88:82: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   88 |         virtual void loadImages(std::vector<vigra::ImageImportInfo>& inputFiles) THROWNOIMAGESBADDIMENSION;
+      |                                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.cpp:25:74: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   25 |     void Deghosting::loadImages(std::vector<std::string>& newInputFiles) THROWNOIMAGESBADDIMENSION {
+      |                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.cpp:39:85: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   39 |     void Deghosting::loadImages(std::vector<vigra::ImageImportInfo>& newInputFiles) THROWNOIMAGESBADDIMENSION {
+      |                                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+[118/304] Building CXX object src/tools/CMakeFiles/hugin_hdrmerge.dir/hugin_hdrmerge.cpp.o
+In file included from /app/include/OpenEXR/ImfHeader.h:51,
+                 from /app/include/OpenEXR/ImfRgbaFile.h:50,
+                 from ../src/hugin_base/vigra_ext/ReduceOpenEXR.h:28,
+                 from ../src/tools/hugin_hdrmerge.cpp:44:
+/app/include/OpenEXR/ImathVec.h:228:34: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  228 |     const Vec2 & normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                                  ^~~~~
+/app/include/OpenEXR/ImathVec.h:232:37: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  232 |     Vec2<T>  normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                     ^~~~~
+/app/include/OpenEXR/ImathVec.h:440:34: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  440 |     const Vec3 & normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                                  ^~~~~
+/app/include/OpenEXR/ImathVec.h:444:37: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  444 |     Vec3<T>  normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                     ^~~~~
+/app/include/OpenEXR/ImathVec.h:622:37: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  622 |     const Vec4 &    normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                                     ^~~~~
+/app/include/OpenEXR/ImathVec.h:626:44: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  626 |     Vec4<T>         normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                            ^~~~~
+/app/include/OpenEXR/ImathVec.h:714:30: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  714 | Vec2<short>::normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                              ^~~~~
+/app/include/OpenEXR/ImathVec.h:723:37: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  723 | Vec2<short>::normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                     ^~~~~
+/app/include/OpenEXR/ImathVec.h:738:28: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  738 | Vec2<int>::normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                            ^~~~~
+/app/include/OpenEXR/ImathVec.h:747:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  747 | Vec2<int>::normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                   ^~~~~
+/app/include/OpenEXR/ImathVec.h:762:30: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  762 | Vec3<short>::normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                              ^~~~~
+/app/include/OpenEXR/ImathVec.h:771:37: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  771 | Vec3<short>::normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                     ^~~~~
+/app/include/OpenEXR/ImathVec.h:786:28: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  786 | Vec3<int>::normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                            ^~~~~
+/app/include/OpenEXR/ImathVec.h:795:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  795 | Vec3<int>::normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                   ^~~~~
+/app/include/OpenEXR/ImathVec.h:809:30: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  809 | Vec4<short>::normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                              ^~~~~
+/app/include/OpenEXR/ImathVec.h:818:37: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  818 | Vec4<short>::normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                     ^~~~~
+/app/include/OpenEXR/ImathVec.h:833:28: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  833 | Vec4<int>::normalizeExc () throw (IEX_NAMESPACE::MathExc);
+      |                            ^~~~~
+/app/include/OpenEXR/ImathVec.h:842:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+  842 | Vec4<int>::normalizedExc () const throw (IEX_NAMESPACE::MathExc);
+      |                                   ^~~~~
+/app/include/OpenEXR/ImathVec.h:1212:26: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ 1212 | Vec2<T>::normalizeExc () throw (IEX_NAMESPACE::MathExc)
+      |                          ^~~~~
+/app/include/OpenEXR/ImathVec.h:1249:33: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ 1249 | Vec2<T>::normalizedExc () const throw (IEX_NAMESPACE::MathExc)
+      |                                 ^~~~~
+/app/include/OpenEXR/ImathVec.h:1704:26: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ 1704 | Vec3<T>::normalizeExc () throw (IEX_NAMESPACE::MathExc)
+      |                          ^~~~~
+/app/include/OpenEXR/ImathVec.h:1743:33: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ 1743 | Vec3<T>::normalizedExc () const throw (IEX_NAMESPACE::MathExc)
+      |                                 ^~~~~
+/app/include/OpenEXR/ImathVec.h:2109:26: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ 2109 | Vec4<T>::normalizeExc () throw (IEX_NAMESPACE::MathExc)
+      |                          ^~~~~
+/app/include/OpenEXR/ImathVec.h:2150:33: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+ 2150 | Vec4<T>::normalizedExc () const throw (IEX_NAMESPACE::MathExc)
+      |                                 ^~~~~
+In file included from ../src/tools/hugin_hdrmerge.cpp:48:
+../src/tools/../deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/tools/../deghosting/deghosting.h:87:71: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   87 |         virtual void loadImages(std::vector<std::string>& inputFiles) THROWNOIMAGESBADDIMENSION;
+      |                                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/tools/../deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/tools/../deghosting/deghosting.h:88:82: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   88 |         virtual void loadImages(std::vector<vigra::ImageImportInfo>& inputFiles) THROWNOIMAGESBADDIMENSION;
+      |                                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from ../src/tools/hugin_hdrmerge.cpp:44:
+../src/hugin_base/vigra_ext/ReduceOpenEXR.h: In function ‘bool readPGMHeader(FILE*, int&, int&, int&)’:
+../src/hugin_base/vigra_ext/ReduceOpenEXR.h:36:10: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+   36 |     fgets(line, 256, file);
+      |     ~~~~~^~~~~~~~~~~~~~~~~
+../src/hugin_base/vigra_ext/ReduceOpenEXR.h:42:10: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+   42 |     fgets(line, 256, file);
+      |     ~~~~~^~~~~~~~~~~~~~~~~
+../src/hugin_base/vigra_ext/ReduceOpenEXR.h:44:10: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+   44 |     fgets(line, 256, file);
+      |     ~~~~~^~~~~~~~~~~~~~~~~
+../src/hugin_base/vigra_ext/ReduceOpenEXR.h:47:10: warning: ignoring return value of ‘char* fgets(char*, int, FILE*)’, declared with attribute warn_unused_result [-Wunused-result]
+   47 |     fgets(line, 256, file);
+      |     ~~~~~^~~~~~~~~~~~~~~~~
+[123/304] Building CXX object src/deghosting/CMakeFiles/deghosting_mask.dir/deghosting_mask.cpp.o
+In file included from ../src/deghosting/deghosting_mask.cpp:32:
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.h:87:71: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   87 |         virtual void loadImages(std::vector<std::string>& inputFiles) THROWNOIMAGESBADDIMENSION;
+      |                                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.h:88:82: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   88 |         virtual void loadImages(std::vector<vigra::ImageImportInfo>& inputFiles) THROWNOIMAGESBADDIMENSION;
+      |                                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+[124/304] Building CXX object src/deghosting/CMakeFiles/deghosting_mask.dir/deghosting.cpp.o
+In file included from ../src/deghosting/deghosting.cpp:21:
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.h:87:71: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   87 |         virtual void loadImages(std::vector<std::string>& inputFiles) THROWNOIMAGESBADDIMENSION;
+      |                                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.h:88:82: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   88 |         virtual void loadImages(std::vector<vigra::ImageImportInfo>& inputFiles) THROWNOIMAGESBADDIMENSION;
+      |                                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.cpp:25:74: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   25 |     void Deghosting::loadImages(std::vector<std::string>& newInputFiles) THROWNOIMAGESBADDIMENSION {
+      |                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~
+../src/deghosting/deghosting.h:36:35: warning: dynamic exception specifications are deprecated in C++11 [-Wdeprecated]
+   36 | #define THROWNOIMAGESBADDIMENSION throw(NoImages, BadDimensions)
+      |                                   ^~~~~
+../src/deghosting/deghosting.cpp:39:85: note: in expansion of macro ‘THROWNOIMAGESBADDIMENSION’
+   39 |     void Deghosting::loadImages(std::vector<vigra::ImageImportInfo>& newInputFiles) THROWNOIMAGESBADDIMENSION {
+      |                                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+[131/304] Building CXX object src/hugin_cpfind/localfeatures/CMakeFiles/localfeatures.dir/CircularKeyPointDescriptor.cpp.o
+../src/hugin_cpfind/localfeatures/CircularKeyPointDescriptor.cpp:175:6: warning: #warning use LUT after parameter tuning [-Wcpp]
+  175 |     #warning use LUT after parameter tuning
+      |      ^~~~~~~
+[258/304] Linking CXX executable src/hugin1/hugin/hugin
+FAILED: src/hugin1/hugin/hugin 
+: && /usr/bin/c++  -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -pthread -O2 -g -DNDEBUG  -L/app/lib -Wl,-z,relro,-z,now -Wl,--as-needed -fopenmp   -rdynamic src/hugin1/hugin/CMakeFiles/hugin.dir/huginApp.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ImagesList.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/MainFrame.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/CPImageCtrl.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/CPImagesComboBox.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/CPEditorPanel.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/CPDetectorDialog.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ImagesPanel.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PanoPanel.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/HDRMergeOptionDialog.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewFrame.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewPanel.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/GLRenderer.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/OptimizePhotometricPanel.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/OptimizePanel.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/CPListFrame.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/TextKillFocusHandler.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreferencesDialog.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ResetDialog.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/LocalizedFileTipProvider.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/TextureManager.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/MeshRemapper.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/VertexCoordRemapper.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/TexCoordRemapper.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ChoosyRemapper.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/MeshManager.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ViewState.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/OutputProjectionInfo.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ToolHelper.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/Tool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/OverviewCameraTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ProjectionGridTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/OverviewOutlinesTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewCropTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/DragTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewIdentifyTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PanosphereSphereTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewDifferenceTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewPanoMaskTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewControlPointTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/GreatCircles.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/AboutDialog.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/LayoutRemapper.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewLayoutLinesTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewColorPickerTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewGuideTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/MaskEditorPanel.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/MaskImageCtrl.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/MaskLoadDialog.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/HtmlWindow.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PanoOperation.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/treelistctrl.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ImagesTree.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PanoOutputDialog.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/GuiLevel.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ImageVariableDialog.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PreviewEditCPTool.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/PapywizardImport.cpp.o src/hugin1/hugin/CMakeFiles/hugin.dir/ChangeImageVariableDialog.cpp.o  -o src/hugin1/hugin/hugin  -Wl,-rpath,/run/build/align_image_stack/_flatpak_build/src/celeste:/run/build/align_image_stack/_flatpak_build/src/hugin1/icpfind:/run/build/align_image_stack/_flatpak_build/src/hugin1/base_wx:/run/build/align_image_stack/_flatpak_build/src/hugin_base:  -lpano13  src/foreign/levmar/libhuginlevmar.a  -lGLEW  -lboost_filesystem  -lboost_system  -lfftw3  -lvigraimpex  -lImath  -lIlmImf  -lIex  -lHalf  -lIlmThread  -lz  -ljpeg  -ltiff  -lpng  -lz  -lz  -lexiv2  -llcms2  -lvigraimpex  -lImath  -lIlmImf  -lIex  -lHalf  -lIlmThread  -lz  -ljpeg  -ltiff  -lpng  -lz  -lz  -lexiv2  src/celeste/libceleste.so.0.0  src/hugin1/icpfind/libicpfindlib.so.0.0  -L/app/lib  -pthread  -lwx_gtk3u_xrc-3.0  -lwx_gtk3u_html-3.0  -lwx_gtk3u_qa-3.0  -lwx_gtk3u_adv-3.0  -lwx_gtk3u_core-3.0  -lwx_baseu_xml-3.0  -lwx_baseu_net-3.0  -lwx_baseu-3.0  -lGL  -lGLU  -lGLEW  src/hugin1/base_wx/libhuginbasewx.so.0.0  src/hugin_base/libhuginbase.so.0.0  -lX11  -lGL  -lGLU  -lsqlite3  -lpano13  src/foreign/levmar/libhuginlevmar.a  -lGLEW  -lboost_filesystem  -lboost_system  -lfftw3  -lvigraimpex  -lImath  -lIlmImf  -lIex  -lHalf  -lIlmThread  -lz  -ljpeg  -lpng  -lz  -ljpeg  -lpng  -ltiff  -lexiv2  -llcms2  -L/app/lib  -pthread  -lwx_gtk3u_xrc-3.0  -lwx_gtk3u_html-3.0  -lwx_gtk3u_qa-3.0  -lwx_gtk3u_adv-3.0  -lwx_gtk3u_core-3.0  -lwx_baseu_xml-3.0  -lwx_baseu_net-3.0  -lwx_baseu-3.0 && :
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLwxAuiFloatingFrame::GLwxAuiFloatingFrame(wxWindow*, GLwxAuiManager*, wxAuiPaneInfo const&, int, long)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.h:147: undefined reference to `wxAuiFloatingFrame::wxAuiFloatingFrame(wxWindow*, wxAuiManager*, wxAuiPaneInfo const&, int, long)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLwxAuiFloatingFrame::OnActivate(wxActivateEvent&)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:231: undefined reference to `wxAuiFloatingFrame::GetOwnerManager() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLPreviewFrame::OnOverviewToggle(wxCommandEvent&)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:1385: undefined reference to `wxAuiManager::GetPane(wxString const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:1397: undefined reference to `wxAuiManager::Update()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:1390: undefined reference to `wxAuiManager::Update()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLPreviewFrame::OnShowEvent(wxShowEvent&)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:1317: undefined reference to `wxAuiManager::GetPane(wxString const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:1328: undefined reference to `wxAuiManager::Update()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLPreviewFrame::LoadOpenGLLayout()':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:755: undefined reference to `wxAuiManager::LoadPerspective(wxString const&, bool)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:759: undefined reference to `wxAuiManager::GetPane(wxString const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:766: undefined reference to `wxAuiManager::Update()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLPreviewFrame::~GLPreviewFrame()':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:789: undefined reference to `wxAuiManager::SavePerspective()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:851: undefined reference to `wxAuiManager::UnInit()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLwxAuiManager::GLwxAuiManager(GLPreviewFrame*, GLPreview*, GLOverview*)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.h:164: undefined reference to `wxAuiManager::wxAuiManager(wxWindow*, unsigned int)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLPreviewFrame::GLPreviewFrame(wxFrame*, HuginBase::Panorama&)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:440: undefined reference to `wxAuiManager::SetManagedWindow(wxWindow*)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::wxAuiPaneInfo(wxAuiPaneInfo const&)':
+/app/include/wx-3.0/wx/aui/framemanager.h:190: undefined reference to `wxAuiPaneButtonArray::operator=(wxAuiPaneButtonArray const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::DefaultPane()':
+/app/include/wx-3.0/wx/aui/framemanager.h:333: undefined reference to `wxAuiPaneInfo::IsValid() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::~wxAuiPaneInfo()':
+/app/include/wx-3.0/wx/aui/framemanager.h:169: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLPreviewFrame::GLPreviewFrame(wxFrame*, HuginBase::Panorama&)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:533: undefined reference to `wxAuiManager::AddPane(wxWindow*, wxAuiPaneInfo const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::~wxAuiPaneInfo()':
+/app/include/wx-3.0/wx/aui/framemanager.h:169: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::wxAuiPaneInfo(wxAuiPaneInfo const&)':
+/app/include/wx-3.0/wx/aui/framemanager.h:190: undefined reference to `wxAuiPaneButtonArray::operator=(wxAuiPaneButtonArray const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::DefaultPane()':
+/app/include/wx-3.0/wx/aui/framemanager.h:333: undefined reference to `wxAuiPaneInfo::IsValid() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::~wxAuiPaneInfo()':
+/app/include/wx-3.0/wx/aui/framemanager.h:169: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLPreviewFrame::GLPreviewFrame(wxFrame*, HuginBase::Panorama&)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:546: undefined reference to `wxAuiManager::AddPane(wxWindow*, wxAuiPaneInfo const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::~wxAuiPaneInfo()':
+/app/include/wx-3.0/wx/aui/framemanager.h:169: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLPreviewFrame::GLPreviewFrame(wxFrame*, HuginBase::Panorama&)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:724: undefined reference to `wxAuiManager::Update()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::operator=(wxAuiPaneInfo const&)':
+/app/include/wx-3.0/wx/aui/framemanager.h:211: undefined reference to `wxAuiPaneButtonArray::operator=(wxAuiPaneButtonArray const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /app/include/wx-3.0/wx/aui/framemanager.h:211: undefined reference to `wxAuiPaneButtonArray::operator=(wxAuiPaneButtonArray const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLwxAuiFloatingFrame::OnMoveFinished()':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:239: undefined reference to `wxAuiFloatingFrame::GetOwnerManager() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.cpp:241: undefined reference to `wxAuiFloatingFrame::OnMoveFinished()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::wxAuiPaneInfo(wxAuiPaneInfo const&)':
+/app/include/wx-3.0/wx/aui/framemanager.h:173: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::wxAuiPaneInfo()':
+/app/include/wx-3.0/wx/aui/framemanager.h:151: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /app/include/wx-3.0/wx/aui/framemanager.h:151: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::wxAuiPaneInfo(wxAuiPaneInfo const&)':
+/app/include/wx-3.0/wx/aui/framemanager.h:173: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLwxAuiManager::~GLwxAuiManager()':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.h:162: undefined reference to `wxAuiManager::~wxAuiManager()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLwxAuiManager::~GLwxAuiManager()':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.h:162: undefined reference to `wxAuiManager::~wxAuiManager()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLwxAuiFloatingFrame::~GLwxAuiFloatingFrame()':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.h:137: undefined reference to `wxAuiFloatingFrame::~wxAuiFloatingFrame()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `GLwxAuiFloatingFrame::~GLwxAuiFloatingFrame()':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLPreviewFrame.h:137: undefined reference to `wxAuiFloatingFrame::~wxAuiFloatingFrame()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::~wxAuiPaneInfo()':
+/app/include/wx-3.0/wx/aui/framemanager.h:169: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::wxAuiPaneInfo(wxAuiPaneInfo const&)':
+/app/include/wx-3.0/wx/aui/framemanager.h:190: undefined reference to `wxAuiPaneButtonArray::operator=(wxAuiPaneButtonArray const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::SetFlag(int, bool)':
+/app/include/wx-3.0/wx/aui/framemanager.h:363: undefined reference to `wxAuiPaneInfo::IsValid() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::~wxAuiPaneInfo()':
+/app/include/wx-3.0/wx/aui/framemanager.h:169: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::operator=(wxAuiPaneInfo const&)':
+/app/include/wx-3.0/wx/aui/framemanager.h:211: undefined reference to `wxAuiPaneButtonArray::operator=(wxAuiPaneButtonArray const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o: in function `wxAuiPaneInfo::wxAuiPaneInfo(wxAuiPaneInfo const&)':
+/app/include/wx-3.0/wx/aui/framemanager.h:173: undefined reference to `wxAuiPaneButtonArray::~wxAuiPaneButtonArray()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTI20GLwxAuiFloatingFrame[_ZTI20GLwxAuiFloatingFrame]+0x10): undefined reference to `typeinfo for wxAuiFloatingFrame'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTI14GLwxAuiManager[_ZTI14GLwxAuiManager]+0x10): undefined reference to `typeinfo for wxAuiManager'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV14GLwxAuiManager[_ZTV14GLwxAuiManager]+0x10): undefined reference to `wxAuiManager::GetClassInfo() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV14GLwxAuiManager[_ZTV14GLwxAuiManager]+0x88): undefined reference to `wxAuiManager::GetEventTable() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV14GLwxAuiManager[_ZTV14GLwxAuiManager]+0x90): undefined reference to `wxAuiManager::GetEventHashTable() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV14GLwxAuiManager[_ZTV14GLwxAuiManager]+0xc0): undefined reference to `wxAuiManager::CanDockPanel(wxAuiPaneInfo const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV14GLwxAuiManager[_ZTV14GLwxAuiManager]+0xc8): undefined reference to `wxAuiManager::ShowHint(wxRect const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV14GLwxAuiManager[_ZTV14GLwxAuiManager]+0xd0): undefined reference to `wxAuiManager::HideHint()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV14GLwxAuiManager[_ZTV14GLwxAuiManager]+0xd8): undefined reference to `wxAuiManager::ProcessDockResult(wxAuiPaneInfo&, wxAuiPaneInfo const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV20GLwxAuiFloatingFrame[_ZTV20GLwxAuiFloatingFrame]+0x10): undefined reference to `wxAuiFloatingFrame::GetClassInfo() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV20GLwxAuiFloatingFrame[_ZTV20GLwxAuiFloatingFrame]+0x7a0): undefined reference to `wxAuiFloatingFrame::OnMoveStart()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro._ZTV20GLwxAuiFloatingFrame[_ZTV20GLwxAuiFloatingFrame]+0x7a8): undefined reference to `wxAuiFloatingFrame::OnMoving(wxRect const&, wxDirection)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLPreviewFrame.cpp.o:(.data.rel.ro+0x30): undefined reference to `wxAuiFloatingFrame::sm_eventTable'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o: in function `wxGLCanvas::~wxGLCanvas()':
+/app/include/wx-3.0/wx/gtk/glcanvas.h:20: undefined reference to `vtable for wxGLCanvas'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o: in function `GLViewer::GLViewer(wxWindow*, HuginBase::Panorama&, int*, GLPreviewFrame*, wxGLContext*)':
+/run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLViewer.cpp:75: undefined reference to `wxGLCanvas::wxGLCanvas(wxWindow*, int, int const*, wxPoint const&, wxSize const&, long, wxString const&, wxPalette const&)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /run/build/align_image_stack/_flatpak_build/../src/hugin1/hugin/GLViewer.cpp:78: undefined reference to `wxGLContext::wxGLContext(wxGLCanvas*, wxGLContext const*)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o: in function `wxGLCanvas::~wxGLCanvas()':
+/app/include/wx-3.0/wx/gtk/glcanvas.h:20: undefined reference to `wxGLCanvasX11::~wxGLCanvasX11()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /app/include/wx-3.0/wx/gtk/glcanvas.h:20: undefined reference to `vtable for wxGLCanvas'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: /app/include/wx-3.0/wx/gtk/glcanvas.h:20: undefined reference to `wxGLCanvasX11::~wxGLCanvasX11()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTI8GLViewer[_ZTI8GLViewer]+0x10): undefined reference to `typeinfo for wxGLCanvas'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV8GLViewer[_ZTV8GLViewer]+0x10): undefined reference to `wxGLCanvas::GetClassInfo() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV8GLViewer[_ZTV8GLViewer]+0x1f8): undefined reference to `wxGLCanvasX11::IsShownOnScreen() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV8GLViewer[_ZTV8GLViewer]+0x338): undefined reference to `wxGLCanvas::SetBackgroundStyle(wxBackgroundStyle)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV8GLViewer[_ZTV8GLViewer]+0x460): undefined reference to `wxGLCanvas::OnInternalIdle()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV8GLViewer[_ZTV8GLViewer]+0x620): undefined reference to `wxGLCanvasX11::SwapBuffers()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV8GLViewer[_ZTV8GLViewer]+0x638): undefined reference to `wxGLCanvas::GetXWindow() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV9GLPreview[_ZTV9GLPreview]+0x10): undefined reference to `wxGLCanvas::GetClassInfo() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV9GLPreview[_ZTV9GLPreview]+0x1f8): undefined reference to `wxGLCanvasX11::IsShownOnScreen() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV9GLPreview[_ZTV9GLPreview]+0x338): undefined reference to `wxGLCanvas::SetBackgroundStyle(wxBackgroundStyle)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV9GLPreview[_ZTV9GLPreview]+0x460): undefined reference to `wxGLCanvas::OnInternalIdle()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV9GLPreview[_ZTV9GLPreview]+0x620): undefined reference to `wxGLCanvasX11::SwapBuffers()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV9GLPreview[_ZTV9GLPreview]+0x638): undefined reference to `wxGLCanvas::GetXWindow() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV10GLOverview[_ZTV10GLOverview]+0x10): undefined reference to `wxGLCanvas::GetClassInfo() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV10GLOverview[_ZTV10GLOverview]+0x1f8): undefined reference to `wxGLCanvasX11::IsShownOnScreen() const'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV10GLOverview[_ZTV10GLOverview]+0x338): undefined reference to `wxGLCanvas::SetBackgroundStyle(wxBackgroundStyle)'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV10GLOverview[_ZTV10GLOverview]+0x460): undefined reference to `wxGLCanvas::OnInternalIdle()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV10GLOverview[_ZTV10GLOverview]+0x620): undefined reference to `wxGLCanvasX11::SwapBuffers()'
+/usr/lib/gcc/x86_64-unknown-linux-gnu/9.3.0/../../../../x86_64-unknown-linux-gnu/bin/ld: src/hugin1/hugin/CMakeFiles/hugin.dir/GLViewer.cpp.o:(.data.rel.ro._ZTV10GLOverview[_ZTV10GLOverview]+0x638): undefined reference to `wxGLCanvas::GetXWindow() const'
+collect2: error: ld returned 1 exit status
+[259/304] Building CXX object src/hugin1/ptbatcher/CMakeFiles/PTBatcherGUI.dir/Batch.cpp.o
+ninja: build stopped: subcommand failed.
+Error: module align_image_stack: Child process exited with code 1
+

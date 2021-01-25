@@ -1,9 +1,12 @@
-# popout3d
+# popout3d-1
 Popout3D creates 3D images from photographs taken with an ordinary camera.
- Take a set of photos of a subject and the software will create a 3D image from
- each pair of photos in the set, so that you can choose the best. Vertical and 
- rotational alignment of the left and right images is essential for a convincing
- 3D effect, but difficult to achieve with an ordinary camera. The software 
- corrects any misalignment. Formats available are anaglyph (red/cyan), 
- side-by-side and crossover. Several sets of photos can be processed at once, 
-they can be previewed and poor ones can be deleted.
+
+
+The original application has been much improved. 
+
+It was originally built on Gmome 3.30, but that is now end-of-life and the application won't build on 3.36 or 3.38.
+
+The main part of the application still builds as do the first 6 modules of the dependency, but the final one, align-image-stack, doesn't.
+
+Would you be interested in trying to find the problem Alexander?
+
