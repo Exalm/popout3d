@@ -8,3 +8,5 @@ It was originally built on Gmome 3.30, but that is now end-of-life and the appli
 
 The main part of the application still builds as do the first 6 modules of the dependency, but the final one, align-image-stack, doesn't.
 
+Would you be interested in trying to find the problem Alex?
+
